@@ -1,42 +1,58 @@
 const output = document.getElementById("output")
 
-        // asking for inputs
-        const start = parseInt(prompt('Enter the Start'))
-        const end = parseInt(prompt('Enter the End'))
-        const step = parseInt(prompt('Enter the Step'))
+// asking for inputs for start end and step
+const start = parseInt(prompt('Enter the Start'))
+const end = parseInt(prompt('Enter the End'))
+const step = parseInt(prompt('Enter the Step'))
 
-        // error handling
-        if (isNaN(start) || isNaN(step) || isNaN(end) || step == 0) {
+var array = [];
+var binaryArray = [];
+var sumArray = 0;
+// error handling checks for numbers
+if (isNaN(start) || isNaN(step) || isNaN(end) || step == 0) {
 
-            throw (output.textContent = 'Invalid input, please refresh the page and try again')
+  throw (output.textContent = 'Invalid input, please refresh the page and try again')
 
-        }
+}
 
-        // functions
-        function generateArray(start, end, step) {
-            let array = [];
-            for (let i = start; i <= end; i += step) {
-                array.push(i);
-            }
-            return array;
-        }
+var arrayVal = start;
+var binaryVal = start.toString(2);
+array.push(start);
+binaryArray.push(binaryVal);
+sumArray = start;
 
-        function sumArray(array) {
-            let sum = 0;
-            array.forEach(function(summand) {
-                sum += summand;
-            });
-            return sum;
-        }
-
-        const array = generateArray(start, end, step);
-        console.log(array);
-        const arrayTotal = sumArray(array);
-        console.log(arrayTotal);
-        var startBinary = Number(Math.abs(start)).toString(2)
-        var stepBinary = Number(Math.abs(step)).toString(2)
-        var endBinary = Number(Math.abs(end)).toString(2)
+// function
+function generateArray(start, end, step) {
+  //step is positive
+  if (step >= 0) {
+    console.log('is positive');
+    for (let i = start; i >= start && i < end;) {
+      arrayVal = arrayVal + step;
+      array.push(arrayVal);
+      sumArray = sumArray + arrayVal;
+      i = i + step;
 
 
-        // alert('each function ' + output)
-        output.innerHTML = 'The generated array is: ' + array + "<br>" + 'The sum is: ' + arrayTotal + "<br>" + 'The binary of the elements\' absolute values are: ' + startBinary + ', ' + stepBinary + ', ' + endBinary
+  arrayBinary = (arrayVal).toString(2);
+  binaryArray.push(arrayBinary);
+    }
+  }
+  else if (step <= 0) {
+    console.log('is negative');
+    for (i = start; i <= start && i > end;) {
+      arrayVal = arrayVal + step;
+      array.push(arrayVal);
+
+      sumArray = sumArray + arrayVal;
+      i = i + step;
+    arrayBinary=(arrayVal).toString(2);
+    binaryArray.push(arrayBinary);
+    }
+  }
+  // alert('each function ' + output)
+  output.innerHTML = 'The generated array is: ' + array + "<br>" + 'The sum is: ' + sumArray + "<br>" + 'The binary of the elements\' absolute values are: ' + binaryArray;
+
+}
+
+generateArray(start, end, step);
+console.log(array);
